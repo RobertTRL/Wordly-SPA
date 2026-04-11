@@ -20,7 +20,7 @@ header {
     justify-content: center;
     margin: 20px 0;
     font-weight: bold;
-    font-size: clamp(20px, 3vw, 50px);
+    font-size: clamp(20px, 3vw, 45px);
     min-width: 300px;
 }
 
@@ -45,7 +45,7 @@ nav input {
 }
 
 nav button {
-    width: clamp(100px, 8vw, 2000px);
+    width: clamp(100px, 8vw, 160px);
     background-color: blue;
     color: white;
     border: none;

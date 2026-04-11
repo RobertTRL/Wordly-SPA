@@ -19,6 +19,12 @@ document.addEventListener(('DOMContentLoaded'), () => {
 
 submitButton.addEventListener('click', getWordDetails)
 
+searchBar.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        getWordDetails()
+    }
+})
+
 audioButton.addEventListener('click', () => {
     if (audioTag.src !== null) {
     audioTag.play()
@@ -37,7 +43,7 @@ async function getWordDetails() {
     if (searchValue) {
         try {
         const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchValue}`)
-        if (response.title || !response.ok) {
+        if (!response.ok) {
             throw new Error('No such word found!')
         }else {
             const cleanedUp = await (response.json())
@@ -56,12 +62,12 @@ async function getWordDetails() {
                     details: definitionDetails}
             })
             const synonymsObject = data.meanings.filter((meaning) => meaning.synonyms.length !== 0)
-            const synonyms = (synonymsObject.map((item) => item.synonyms).length === 0)? 'None' : synonymsObject.map((item) => item.synonyms)
+            const synonyms = (synonymsObject.map((item) => item.synonyms).length === 0)? 'None' : synonymsObject.map((item) => item.synonyms).flat()
             const antonymsObject = data.meanings.filter((meaning) => meaning.antonyms.length !== 0)
-            const antonyms = (antonymsObject.map((item) => item.antonyms).length === 0)? 'None' : antonymsObject.map((item) => item.antonyms)
+            const antonyms = (antonymsObject.map((item) => item.antonyms).length === 0)? 'None' : antonymsObject.map((item) => item.antonyms).flat()
             wordDiv.textContent = word
             phoneticsDiv.textContent = phonetic
-            audioTag.src = audioUrl
+            audioTag.src = (audioUrl)? '' : audioUrl
             synonymsDiv.innerHTML = `<h3 style='display: inline'>Synonyms : </h3>${synonyms}`
             antonymsDiv.innerHTML = `<h3 style='display: inline'>Antonyms : </h3>${antonyms}`
             const h2 = document.createElement('h2')
