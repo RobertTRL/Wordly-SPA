@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordly SPA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><h1>Wordly Dictionary</h1></header>
+    <nav>
+        <input type='search' placeholder='Search for a word...'>
+        <button>Search</button>
+    </nav>
+    <main>
+        <div id="results">
+            <div id="audio">
+                <audio id="audio-file"></audio>
+                <button id="audio-button">
+                    <img src="../assets/volume_up_24dp_000000_FILL0_wght400_GRAD0_opsz24.png" alt="" id="volume-high">
+                </button>
+            </div>
+            <div id="word"></div>
+            <div id="phonetics"></div>
+            <div id="definitions-examples"></div>
+            <div id="synonyms"></div>
+            <div id="antonyms"></div>
+        </div>
+        <div id="errors">
+            <img src="../assets/frame_exclamation_64dp_FF0030_FILL0_wght400_GRAD0_opsz48.png" alt="">
+            <p id="error-message">Error message</p>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
