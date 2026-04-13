@@ -26,7 +26,7 @@ searchBar.addEventListener('keydown', (e) => {
 })
 
 audioButton.addEventListener('click', () => {
-    if (audioTag.src !== null) {
+    if (audioTag.src) {
     audioTag.play()
     }
 })
@@ -51,7 +51,7 @@ async function getWordDetails() {
             const word = data.word
             const phonetic = data.phonetic
             const audio = data.phonetics.find((phonetic) => phonetic.audio)
-            const audioUrl = (audio)? audio.audio : null
+            const audioUrl = (audio)? audio.audio : ''
             const allDefinitions = data.meanings.map((meaning) =>  {
                 const partOfSpeech = meaning.partOfSpeech
                 const definitionDetails = meaning.definitions.map((def) => {
@@ -67,7 +67,7 @@ async function getWordDetails() {
             const antonyms = (antonymsObject.map((item) => item.antonyms).length === 0)? 'None' : antonymsObject.map((item) => item.antonyms).flat()
             wordDiv.textContent = word
             phoneticsDiv.textContent = phonetic
-            audioTag.src = (audioUrl)? '' : audioUrl
+            audioTag.src = audioUrl
             synonymsDiv.innerHTML = `<h3 style='display: inline'>Synonyms : </h3>${synonyms}`
             antonymsDiv.innerHTML = `<h3 style='display: inline'>Antonyms : </h3>${antonyms}`
             const h2 = document.createElement('h2')
