@@ -1,7 +1,6 @@
 const searchBar = document.querySelector('nav input')
 const submitButton = document.querySelector('nav button')
 const resultsDiv = document.querySelector('#results')
-const cssLink = document.querySelector('link[rel~="stylesheet"]')
 const errorDiv = document.querySelector('#errors')
 const errorMessage = document.querySelector('#error-message')
 const audioButton = document.querySelector('#audio-button')
@@ -62,14 +61,14 @@ async function getWordDetails() {
                     details: definitionDetails}
             })
             const synonymsObject = data.meanings.filter((meaning) => meaning.synonyms.length !== 0)
-            const synonyms = (synonymsObject.map((item) => item.synonyms).length === 0)? 'None' : synonymsObject.map((item) => item.synonyms).flat()
+            const synonyms = (synonymsObject.map((item) => item.synonyms).length === 0)? 'None' : (synonymsObject.map((item) => item.synonyms).flat())
             const antonymsObject = data.meanings.filter((meaning) => meaning.antonyms.length !== 0)
-            const antonyms = (antonymsObject.map((item) => item.antonyms).length === 0)? 'None' : antonymsObject.map((item) => item.antonyms).flat()
+            const antonyms = (antonymsObject.map((item) => item.antonyms).length === 0)? 'None' : (antonymsObject.map((item) => item.antonyms).flat())
             wordDiv.textContent = word
             phoneticsDiv.textContent = phonetic
             audioTag.src = audioUrl
-            synonymsDiv.innerHTML = `<h3 style='display: inline'>Synonyms : </h3>${synonyms}`
-            antonymsDiv.innerHTML = `<h3 style='display: inline'>Antonyms : </h3>${antonyms}`
+            synonymsDiv.innerHTML = `<h3 style='display: inline'>Synonyms: </h3>${synonyms}`
+            antonymsDiv.innerHTML = `<h3 style='display: inline'>Antonyms: </h3>${antonyms}`
             const h2 = document.createElement('h2')
             h2.textContent = 'Definitions'
             definitionsDiv.appendChild(h2)
