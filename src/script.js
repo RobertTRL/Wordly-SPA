@@ -48,7 +48,7 @@ async function getWordDetails() {
             const cleanedUp = await (response.json())
             const data = cleanedUp[0]
             const word = data.word
-            const phonetic = data.phonetic
+            const phonetic = (data.phonetic)? data.phonetic : (data.phonetics.find((phonetic) => phonetic.text)).text
             const audio = data.phonetics.find((phonetic) => phonetic.audio)
             const audioUrl = (audio)? audio.audio : ''
             const allDefinitions = data.meanings.map((meaning) =>  {
@@ -61,9 +61,9 @@ async function getWordDetails() {
                     details: definitionDetails}
             })
             const synonymsObject = data.meanings.filter((meaning) => meaning.synonyms.length !== 0)
-            const synonyms = (synonymsObject.map((item) => item.synonyms).length === 0)? 'None' : (synonymsObject.map((item) => item.synonyms).flat())
+            const synonyms = (synonymsObject.map((item) => item.synonyms).length === 0)? 'None' : (synonymsObject.map((item) => item.synonyms).flat()).join(', ')
             const antonymsObject = data.meanings.filter((meaning) => meaning.antonyms.length !== 0)
-            const antonyms = (antonymsObject.map((item) => item.antonyms).length === 0)? 'None' : (antonymsObject.map((item) => item.antonyms).flat())
+            const antonyms = (antonymsObject.map((item) => item.antonyms).length === 0)? 'None' : (antonymsObject.map((item) => item.antonyms).flat()).join(', ')
             wordDiv.textContent = word
             phoneticsDiv.textContent = phonetic
             audioTag.src = audioUrl
@@ -81,7 +81,7 @@ async function getWordDetails() {
                     const li = document.createElement('li')
                     const definitionP = document.createElement('p')
                     const exampleP = document.createElement('p')
-                    definitionP.textContent = `${detail.definition}`
+                    definitionP.textContent = `\u2022 ${detail.definition}`
                     definitionP.classList.add('definition')
                     li.appendChild(definitionP)
                     if (detail.example) {

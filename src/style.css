@@ -72,12 +72,11 @@ li {
 }
 
 .definition {
-    text-indent: 2rem;
+    text-indent: 1rem;
 }
 
 .example {
-    text-indent: 0.5rem;
-    font-style: italic;
+    text-indent: 1rem;
     color: #818181;
 }
 
