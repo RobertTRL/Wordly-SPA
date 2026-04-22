@@ -48,7 +48,7 @@ async function getWordDetails() {
             const cleanedUp = await (response.json())
             const data = cleanedUp[0]
             const word = data.word
-            const phonetic = (data.phonetic)? data.phonetic : (data.phonetics.find((phonetic) => phonetic.text)).text
+            const phonetic = (data.phonetics.find((phonetic) => phonetic.text))? (data.phonetics.find((phonetic) => phonetic.text)).text: 'No phonetic available'
             const audio = data.phonetics.find((phonetic) => phonetic.audio)
             const audioUrl = (audio)? audio.audio : ''
             const allDefinitions = data.meanings.map((meaning) =>  {
